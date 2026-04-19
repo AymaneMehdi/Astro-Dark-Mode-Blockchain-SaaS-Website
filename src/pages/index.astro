@@ -1,10 +1,12 @@
 ---
 import DefaultLayout from "../layouts/Default.astro";
+import { HeaderSection } from "../sections/Header";
 import { HeroSection } from "../sections/Hero";
 import { FeaturesCardsSection } from "../sections/FeaturesCards";
 ---
 
 <DefaultLayout>
+  <HeaderSection client:load />
   <HeroSection client:load />
   <FeaturesCardsSection client:load />
 </DefaultLayout>
