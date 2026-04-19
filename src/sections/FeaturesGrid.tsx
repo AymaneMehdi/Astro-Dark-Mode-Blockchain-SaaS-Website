@@ -9,6 +9,8 @@ const listItems = [
 export const FeaturesGrid = () => {
   const torusKnotRef = useRef(null);
   const firstHemisphereRef = useRef(null);
+  const coneRef = useRef(null);
+  const hemisphere2Ref = useRef(null);
   const { scrollYProgress: torusKnotScrollYProgress } = useScroll({
     target: torusKnotRef,
     offset: ["start end", "end start"],
@@ -35,7 +37,35 @@ export const FeaturesGrid = () => {
   const firstHemisphereRotate = useTransform(
     firstHemisphereScrollYProgress,
     [0, 1],
-    [30, -30],
+    [20, -50],
+  );
+  const { scrollYProgress: coneScrollYProgress } = useScroll({
+    target: coneRef,
+    offset: ["start end", "end start"],
+  });
+    const coneTranslateY = useTransform(
+    coneScrollYProgress,
+    [0, 1],
+    [100, -100],
+  );
+  const coneRotate = useTransform(
+    coneScrollYProgress,
+    [0, 1],
+    [12, 45],
+  );
+  const { scrollYProgress: hemisphere2ScrollYProgress } = useScroll({
+    target: hemisphere2Ref,
+    offset: ["start end", "end start"],
+  });
+    const hemisphere2TranslateY = useTransform(
+    hemisphere2ScrollYProgress,
+    [0, 1],
+    [50, -50],
+  );
+  const hemisphere2Rotate = useTransform(
+    hemisphere2ScrollYProgress,
+    [0, 1],
+    [-20, 10],
   );
   return (
     <section className="py-24 overflow-x-clip">
@@ -70,35 +100,52 @@ export const FeaturesGrid = () => {
             <div>
               <div className="hidden md:block">
                 <div className="relative inline-flex z-0">
-                  <img
+                  <motion.img
                     src="assets/images/torus-knot.png"
                     alt="Torus Kont 3D image"
                     className="size-96 max-w-none"
                     ref={torusKnotRef}
+                    style={{
+                      translateY: torusKnotTranslateY,
+                      rotate: torusKnotRotate,
+                    }}
                   />
-                  <img
+                  <motion.img
                     src="assets/images/hemisphere.png"
                     alt="Hemisphere 3d shape"
                     className="absolute size-96 top-3/4 -z-10 scale-x-[-1]"
                     ref={firstHemisphereRef}
+                    style={{
+                      translateY: firstHemisphereTranslateY,
+                      rotate: firstHemisphereRotate,
+                    }}
                   />
                 </div>
               </div>
             </div>
           </div>
-
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="relative hidden md:block">
               <div className="absolute right-0 z-0">
-                <img
+                <motion.img
                   src="assets/images/cone.png"
                   alt="Cone 3D shape"
                   className="size-96 max-w-none rotate-12"
+                  ref={coneRef}
+                  style={{
+                    translateY: coneTranslateY,
+                    rotate: coneRotate,
+                  }}
                 />
-                <img
+                <motion.img
                   src="assets/images/hemisphere.png"
                   alt="Hemisphere 3D shape"
                   className="absolute top-3/4 -z-10 left-0"
+                  ref={hemisphere2Ref}
+                  style={{
+                    translateY: hemisphere2TranslateY,
+                    rotate: hemisphere2Rotate,
+                  }}
                 />
               </div>
             </div>
