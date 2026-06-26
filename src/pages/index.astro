@@ -1,5 +1,8 @@
 ---
 import DefaultLayout from "../layouts/Default.astro";
+import { HeaderSection } from "../sections/Header";
 ---
 
-<DefaultLayout></DefaultLayout>
+<DefaultLayout>
+  <HeaderSection client:load />
+</DefaultLayout>
